@@ -3,6 +3,32 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+// Set up mongoose connection
+var User = require('./models/User')
+mongoose.set("strictQuery", false);
+
+run();
+async function run() {
+    try {
+    await mongoose.connect('mongodb+srv://phucnguyenlamp:dungcomamo@cluster0.jhgumvn.mongodb.net/appThuDam?retryWrites=true&w=majority')
+       // Retrieve a single user (you might want to specify a query condition)
+      const newuser =  new User({
+        name: "phuc",
+        email: "conchim@",
+        password: "banana",
+        fapCount: "hello",
+        lastFap: "today",
+      })
+      console.log(newuser);
+      await newuser.save()
+      const user = await User.findOne();
+      console.log(user);
+  } catch (err) {
+      console.error("Error fetching user data:", err);
+      res.status(500).send("Error fetching user data");
+  }
+}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
