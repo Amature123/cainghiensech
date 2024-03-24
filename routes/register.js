@@ -10,7 +10,6 @@ router.use(express.urlencoded({ extended: true }));
 // Routes
 router.get('/', async (req, res,next) => {
     try {
-        const users = await User.find();
         res.render('Register');
     } catch (err) {
         console.error(err);
@@ -18,7 +17,7 @@ router.get('/', async (req, res,next) => {
     }
 });
 
-router.post('/add-user', async (req, res) => {
+router.post('/add-user', async (req, res,next) => {
   try {
     await mongoose.connect('mongodb+srv://phucnguyenlamp:dungcomamo@cluster0.jhgumvn.mongodb.net/appThuDam?retryWrites=true&w=majority')
        // Retrieve a single user (you might want to specify a query condition)
