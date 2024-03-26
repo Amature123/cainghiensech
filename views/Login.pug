@@ -2,10 +2,6 @@ block content
   h1 #{title}
   form(method='POST')
     div.form-group
-      label(for='name') Name:
-      br
-      input#name.form-control(type='text', placeholder='Name' name='name' required value=(user ? user.name : ''))
-      br
       label(for='email') Email:
       br
       input#email.form-control(type='text', placeholder='Email ' name='email' required value=(user ? user.email : ''))
