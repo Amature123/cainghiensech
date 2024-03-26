@@ -6,18 +6,6 @@ var User = require('../models/User');
 router.get('/', function(req, res, next) {
   res.render('index', { user: "name" });
 });
-router.post('/', async function(req, res, next) {
-  const user = new User({ name: req.body.name})
-  const userExists = await User.findOne({ name: req.body.name }).exec();
-  if (userExists) {
-    res.redirect('/');
-  } else {
-    await user.save();
-    res.redirect('/');
-  }
-});
-
-
 
 
 

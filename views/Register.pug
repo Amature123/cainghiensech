@@ -1,3 +1,4 @@
+
 block content
   h1 #{title}
   form(method='POST')
@@ -12,7 +13,7 @@ block content
       br
       label(for='password') Password:
       br
-      input#password.form-control(type='text', placeholder='Password' name='password' required value=(user ? user.password : ''))
+      input#password.form-control(type='password', placeholder='Password' name='password' required value=(user ? user.password : ''))
       br 
       br
     button.btn.btn-primary(type='submit') Submit

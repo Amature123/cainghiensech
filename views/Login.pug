@@ -1,19 +1,25 @@
 block content
   h1 #{title}
-  form(method='POST')
-    div.form-group
-      label(for='email') Email:
+  if user
+    h1 WELCOME BACK #{user.name}
+    a(href="/logout") LOG OUT
+  else
+    h1 Please Login
+    form(method='POST')
+      div.form-group
+        label(for='email') Email:
+        br
+        input#email.form-control(type='text', placeholder='Email ' name='email' required )
+        br
+        label(for='password') Password:
+        br
+        input#password.form-control(type='password', placeholder='Password' name='password' required )
+        br 
+        br
+      button.btn.btn-primary(type='submit') Submit
       br
-      input#email.form-control(type='text', placeholder='Email ' name='email' required value=(user ? user.email : ''))
-      br
-      label(for='password') Password:
-      br
-      input#password.form-control(type='text', placeholder='Password' name='password' required value=(user ? user.password : ''))
-      br 
-      br
-    button.btn.btn-primary(type='submit') Submit
-    
-  if errors 
+      a(href="/register") Dont have account  ? Register here
+if errors 
     ul
       for error in errors
         li!= error.msg
