@@ -56,7 +56,8 @@ asyncHandler(async (req, res, next) => {
   const user = new User({ 
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword
+      password: hashedPassword,
+      fapCount: 0
   });
 
   if (!errors.isEmpty()) {
@@ -73,12 +74,12 @@ asyncHandler(async (req, res, next) => {
     const userExists = await User.findOne({ name: req.body.name }).exec();
     if (userExists) {
       // User exists, redirect to its detail page.
-      console.log('User exists')
-      res.redirect('/');
+      console.log('User exists');
+      res.redirect('/Register');
     } else {
       await user.save(); // Save the user object
       // New user saved. Redirect to homepage.
-      res.redirect('/');
+      res.redirect('/Login');
     }
   }
 }),
