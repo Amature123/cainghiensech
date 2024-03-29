@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const session = require('express-session')
 const methodOverride = require('method-override')
 
+
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
@@ -61,6 +62,17 @@ app.get("/logout", (req, res,next) => {
     }
   res.redirect("/");
   });
+});
+app.post('/increaseFapCount', async (req, res) => {
+  try {
+    const user = req.user; // Assuming you have the user object available in the request
+    user.fapCount++; // Increment fapCount
+    await user.save(); 
+    res.redirect('/Login');
+  } catch (error) {
+    console.error('Error increasing fapCount:', error);
+    res.status(500).send('Internal server error'); // Handle errors
+  }
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
